@@ -119,7 +119,7 @@ export const stop = async (): Promise<void> => {
 export const deleteTables = async (): Promise<void> =>
   runWithRealTimers(async () => {
     const dynamoDB = dbClient();
-    const tables = getTables();
+    const tables = await getTables();
     await Promise.all(
       tables.map(table =>
         dynamoDB
@@ -136,7 +136,7 @@ export const deleteTables = async (): Promise<void> =>
 export const createTables = async (): Promise<void> =>
   runWithRealTimers(async () => {
     const dynamoDB = dbClient();
-    const tables = getTables();
+    const tables = await getTables();
 
     await Promise.all(
       tables.map(table => dynamoDB.createTable(table).promise())
